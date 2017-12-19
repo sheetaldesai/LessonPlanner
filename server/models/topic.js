@@ -6,7 +6,7 @@ var TopicSchema = mongoose.Schema({
     lessonDate: {type: Date, required: false},
     category: {type: String},
     duration: {type: Number}, //in minutes
-    resources: {type: String[], required: false},
+    resources: {type: [String], required: false},
     _course: {type: Schema.Types.ObjectId, ref: 'Course'}
 }, {timestamps: true}, {usePushEach: true});
 
