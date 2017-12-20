@@ -1,3 +1,19 @@
-<p>
-  course works!
-</p>
+<h1>{{course.title}}</h1>
+<mat-toolbar class="calendar-nav">
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button (click)="createWeek(currentWeek[0].subtract(1, 'week'))">
+    <mat-icon aria-label="back arrow">navigate_before</mat-icon>
+  </button>
+  <button mat-icon-button (click)="createWeek(currentWeek[0].add(1, 'week'))">
+    <mat-icon aria-label="forward arrow">navigate_next</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-grid-list cols="7" rowHeight="300px">
+  <mat-grid-tile 
+  *ngFor="let day of currentWeek" 
+  (click)="selectDay(day)"
+  [ngClass]="{'picked': day === selectedDate}">
+  {{day.format('l')}}
+  </mat-grid-tile>
+</mat-grid-list>
+<!-- <app-topic-list [courseId]="course.id" [selectedDate]="selectedDate"></app-topic-list> -->
