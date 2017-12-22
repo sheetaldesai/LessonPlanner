@@ -9,6 +9,8 @@ import {
   MatIconModule,
   MatGridListModule,
   MatFormFieldModule,
+  MatCardModule,
+  MatListModule,
   MatButtonModule } from '@angular/material'; // add more stuff as needed, this was just random for now
 
 
@@ -45,6 +47,8 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
     MatGridListModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatCardModule,
+    MatListModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

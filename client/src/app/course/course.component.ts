@@ -18,7 +18,8 @@ export class CourseComponent implements OnInit {
   ngOnInit() {
     this.course = this._dataService.course;
     this.createWeek(this.course.startDate);
-    console.log(this.course.topics.length)
+    console.log(this.course.topics.length);
+    console.log("Course comp: ", this.selectedDate);
   }
 
   createWeek(selectedDay) {

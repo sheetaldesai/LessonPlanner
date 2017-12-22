@@ -1,3 +1,41 @@
-<p>
-  topic-list works!
-</p>
+<mat-toolbar class="header">
+  <span>Topics planned for {{selectedDate | date : 'MM-dd-yyyy'}}</span>
+  <span class="spacer"></span>
+  <button mat-icon-button>
+    <mat-icon class="fa fa-plus-circle fa-3x" aria-hidden="true"></mat-icon>
+  </button>
+</mat-toolbar>
+<mat-grid-list cols="2">
+    <mat-grid-tile *ngFor = "let topic of topics">
+    <mat-card class="card">
+        <mat-toolbar class = "cardTitle">
+            <span>{{topic.title}}</span>
+            <span class="spacer"></span>
+            <button mat-icon-button>
+              <mat-icon class="fa fa-pencil fa-2x" aria-hidden="true"></mat-icon>
+            </button>
+            <button mat-icon-button>
+                <mat-icon class="fa fa-trash fa-2x" aria-hidden="true"></mat-icon>
+            </button>
+        </mat-toolbar>
+        <mat-card-title class="cardPadding">{{topic.category}}, {{topic.duration}} min Long</mat-card-title>
+     
+        <mat-card-content><h3>Topics to Cover:</h3></mat-card-content>
+        <mat-card-content>
+          <ol>
+            <li *ngFor = "let subTopic of topic.subTopics"> {{subTopic}} </li>
+          </ol>
+        </mat-card-content>
+        <mat-card-content>
+            <h3>Resources:</h3>
+            <ul>
+              <li *ngFor = "let res of topic.resources"> <a>{{res}}</a> </li>
+            </ul>
+          </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+

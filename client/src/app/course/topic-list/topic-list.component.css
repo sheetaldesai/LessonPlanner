@@ -1,0 +1,36 @@
+.spacer {
+    
+    flex: 1 1 auto;
+  }
+
+  .card {
+      width: 600px;
+      height: 450px;
+      
+      background-color: aquamarine;
+      color: lightslategray;
+      padding: 0;
+  }
+
+  .card h1, h2, h3 {
+      padding: 5px 5px 5px 24px;
+      color: blue;
+  }
+
+  .cardPadding {
+      padding: 10px;
+  }
+  .cardTitle {
+      background-color: lightslategray;
+      padding: 24px;
+      color: whitesmoke;
+  }
+
+  .cardActions {
+      text-align: right;
+      display: inline-block;
+      vertical-align: top;
+      width: 100px;
+  }
+
+  
