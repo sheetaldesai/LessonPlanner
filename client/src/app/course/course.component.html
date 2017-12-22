@@ -1,19 +1,54 @@
-<h1>{{course.title}}</h1>
+<h1 class="title">{{course.title}}</h1>
 <mat-toolbar class="calendar-nav">
   <span class="fill-remaining-space"></span>
-  <button mat-icon-button (click)="createWeek(currentWeek[0].subtract(1, 'week'))">
+  <form #dateForm="ngForm">
+    <mat-form-field class="small-font">
+      <input matInput [matDatepicker]="picker" placeholder="Jump to date" 
+      (dateChange)="createWeek($event.value); dateForm.reset()"
+      [min]="course.startDate" [max]="course.endDate" [matDatepickerFilter]="courseDayPickerFilter">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+  <button mat-icon-button (click)="createWeek(currentWeek[0].clone().subtract(1, 'week'))">
     <mat-icon aria-label="back arrow">navigate_before</mat-icon>
   </button>
-  <button mat-icon-button (click)="createWeek(currentWeek[0].add(1, 'week'))">
+  <button mat-icon-button (click)="createWeek(currentWeek[0].clone().add(1, 'week'))">
     <mat-icon aria-label="forward arrow">navigate_next</mat-icon>
   </button>
 </mat-toolbar>
 <mat-grid-list cols="7" rowHeight="300px">
   <mat-grid-tile 
   *ngFor="let day of currentWeek" 
-  (click)="selectDay(day)"
-  [ngClass]="{'picked': day === selectedDate}">
-  {{day.format('l')}}
+  (click)="selectDay(day)">
+  <mat-card class="calendar-day" [ngClass]="{'no-lesson': !course.meetingDays.includes(day.weekday()) || !day.isBetween(course.startDate, course.endDate, null, []), 'picked': day === selectedDate}">
+    <mat-card-title>{{day.format('l')}}</mat-card-title>
+    <mat-card-content *ngIf="course.meetingDays.includes(day.weekday()) && day.isBetween(course.startDate, course.endDate, null, []); else noLesson">
+      <button mat-mini-fab [matMenuTriggerFor]="addTopicMenu">
+        <mat-icon aria-label="plus button">add</mat-icon>
+      </button>
+      <mat-menu #addTopicMenu="matMenu">
+        <button mat-menu-item>
+          Add a new topic...
+        </button>
+        <button mat-menu-item *ngFor="let t of undatedTopics" (click)="addTopicToDay(day, t)">
+          {{t.title}}
+        </button>
+      </mat-menu>
+      <div class="topics">
+        <mat-chip-list>
+          <mat-chip *ngFor="let topic of topicsOnDay(day)" [selectable]="selectable"
+                    removable="true" (remove)="remove(topic)">
+            {{topic.title}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </mat-card-content>
+    <ng-template #noLesson>
+      <mat-card-content>No class today</mat-card-content>
+    </ng-template>
+  </mat-card>
   </mat-grid-tile>
 </mat-grid-list>
 <app-topic-list [courseId]="course.id" [selectedDate]="selectedDate"></app-topic-list>

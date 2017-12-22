@@ -11,7 +11,11 @@ import {
   MatFormFieldModule,
   MatCardModule,
   MatListModule,
-  MatButtonModule } from '@angular/material'; // add more stuff as needed, this was just random for now
+  MatButtonModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule } from '@angular/material'; // add more stuff as needed, this was just random for now
 
 
 import * as moment from 'moment';
@@ -48,7 +52,11 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

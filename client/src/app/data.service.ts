@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Course } from './course';
 import { Topic } from './topic';
 import * as moment from 'moment';
+import { BehaviorSubject } from 'Rxjs';
 
 @Injectable()
 export class DataService {
@@ -16,6 +17,7 @@ export class DataService {
     80,
     []
   );
+  currentTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor() {
     this.addTopics();
@@ -73,7 +75,7 @@ export class DataService {
     );
     this.course.topics.push(
       new Topic(
-        '200',
+        '1000',
         'Beginning Check In',
         moment('01/12/18').toDate(),
         'Exam',
@@ -85,7 +87,7 @@ export class DataService {
     );
     this.course.topics.push(
       new Topic(
-        '111',
+        '1001',
         'Doubly Linked Lists',
         moment('01/17/18').toDate(),
         'Lecture',
@@ -95,11 +97,36 @@ export class DataService {
         this.course.id,
       )
     );
+    this.course.topics.push(
+      new Topic(
+        '1010',
+        'Strings',
+        undefined,
+        'Lecture',
+        30,
+        [],
+        [],
+        this.course.id,
+      )
+    );
+    this.course.topics.push(
+      new Topic(
+        '1011',
+        'Dictionaries',
+        undefined,
+        'Lab',
+        40,
+        [],
+        [],
+        this.course.id,
+      )
+    );
   };
 
-  getTopics(courseId: String, selectedDate: moment.Moment) : Topic[] {
-    return this.course.topics.filter(topic=>moment(topic.lessonDate).isSame(selectedDate));
+  getTopics(courseId: String, selectedDate: moment.Moment) {
+    this.currentTopics.next(
+      this.course.topics.filter(topic => moment(topic.lessonDate).isSame(selectedDate))
+    );
   }
-
 
 }

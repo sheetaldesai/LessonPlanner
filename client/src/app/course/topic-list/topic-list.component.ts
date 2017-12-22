@@ -10,9 +10,9 @@ import { MatCardModule } from '@angular/material/card';
 })
 export class TopicListComponent implements OnInit {
 
-  @Input() courseId
-  @Input() selectedDate 
-  topics : Topic[] = [];
+  @Input() courseId;
+  @Input() selectedDate;
+  topics: Topic[] = [];
 
   constructor(private _dataService : DataService) {
     console.log("CourseId: ", this.courseId);
@@ -21,12 +21,14 @@ export class TopicListComponent implements OnInit {
    }
 
   ngOnInit() {
-    
+    this._dataService.currentTopics.subscribe(
+      (value) => this.topics = value
+    );
   }
 
   ngOnChanges(){
     console.log("changes to selected date: ", this.selectedDate);
-    this.topics = this._dataService.getTopics(this.courseId, this.selectedDate);
+    // this._dataService.getTopics(this.courseId, this.selectedDate);
     console.log(this.topics);
   }
 
