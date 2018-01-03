@@ -25,6 +25,7 @@ import { MainComponent } from './main/main.component';
 
 import { DataService } from './data.service';
 import { TopicListComponent } from './course/topic-list/topic-list.component';
+import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-dialog.component'; 
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
     LoginComponent,
     CourseComponent,
     MainComponent,
-    TopicListComponent
+    EditTopicDialogComponent
+    
   ],
   imports: [
     BrowserModule,
