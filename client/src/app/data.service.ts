@@ -18,9 +18,11 @@ export class DataService {
     []
   );
   currentTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  undatedTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   constructor() {
     this.addTopics();
+    this.getUndatedTopics(this.course._id);
    }
 
   addTopics = function() {
@@ -104,8 +106,8 @@ export class DataService {
         undefined,
         'Lecture',
         30,
-        [],
-        [],
+        ['Double and single quotes', 'Concatination'],
+        ['https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String'],
         this.course.id,
       )
     );
@@ -116,7 +118,7 @@ export class DataService {
         undefined,
         'Lab',
         40,
-        [],
+        ['Key value pairs', 'Map Vs. Dictionary', 'Adding and removing'],
         [],
         this.course.id,
       )
@@ -127,6 +129,9 @@ export class DataService {
     this.currentTopics.next(
       this.course.topics.filter(topic => moment(topic.lessonDate).isSame(selectedDate))
     );
+  }
+  getUndatedTopics(courseId: String) {
+    this.undatedTopics.next(this.course.topics.filter(topic => !topic.lessonDate));
   }
 
 }

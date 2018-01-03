@@ -6,22 +6,24 @@
   .card {
       width: 600px;
       height: 450px;
-      
-      background-color: aquamarine;
-      color: lightslategray;
+      display: inline-block;
+      /* background-color: aquamarine;
+      color: lightslategray; */
       padding: 0;
+      margin: 20px;
+      vertical-align: top;
   }
 
-  .card h1, h2, h3 {
+  .card h1, .card h2, .card h3 {
       padding: 5px 5px 5px 24px;
-      color: blue;
+      color: #FFAB00;
   }
 
   .cardPadding {
       padding: 10px;
   }
   .cardTitle {
-      background-color: lightslategray;
+      background-color: #673AB7;
       padding: 24px;
       color: whitesmoke;
   }

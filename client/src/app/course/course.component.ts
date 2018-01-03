@@ -3,6 +3,8 @@ import { Course } from '../course';
 import { Topic } from '../topic';
 import * as moment from 'moment';
 import { DataService } from '../data.service';
+import { TopicFormComponent } from './topic-form/topic-form.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-course',
@@ -10,7 +12,7 @@ import { DataService } from '../data.service';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-  course;
+  course: Course;
   selectedDate: moment.Moment;
   currentWeek: moment.Moment[] = [];
   undatedTopics: Topic[] = [];
@@ -20,11 +22,9 @@ export class CourseComponent implements OnInit {
   ngOnInit() {
     this.course = this._dataService.course;
     this.createWeek(this.course.startDate);
-    for (let topic of this.course.topics) {
-      if (!topic.lessonDate) {
-        this.undatedTopics.push(topic);
-      }
-    }
+    this._dataService.undatedTopics.subscribe(
+      topics => this.undatedTopics = topics
+    );
   }
 
   createWeek(selectedDay) {
@@ -43,14 +43,14 @@ export class CourseComponent implements OnInit {
     } else {
       this.selectedDate = moment(day);
     }
-    this._dataService.getTopics(this.course.id, this.selectedDate);
+    this._dataService.getTopics(this.course._id, this.selectedDate);
   }
 
   remove(topic: Topic) {
     const day = moment(topic.lessonDate);
     topic.lessonDate = undefined;
-    this.undatedTopics.push(topic);
-    this._dataService.getTopics(this.course.id, day);
+    this._dataService.getUndatedTopics(this.course._id);
+    this._dataService.getTopics(this.course._id, day);
   }
 
   topicsOnDay(day: moment.Moment): Topic[] {
@@ -71,7 +71,10 @@ export class CourseComponent implements OnInit {
     let idx = this.undatedTopics.indexOf(topic);
     this.undatedTopics.splice(idx, 1);
     topic.lessonDate = day.toDate();
-    this._dataService.getTopics(this.course.id, day);
+    this._dataService.getTopics(this.course._id, day);
+    this._dataService.getUndatedTopics(this.course._id);
   }
+
+
 
 }

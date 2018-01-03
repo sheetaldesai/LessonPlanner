@@ -15,20 +15,21 @@ import {
   MatChipsModule,
   MatDatepickerModule,
   MatNativeDateModule,
-  MatInputModule } from '@angular/material'; // add more stuff as needed, this was just random for now
-
+  MatInputModule,
+  MatDialogModule } from '@angular/material'; // add more stuff as needed, this was just random for now
 
 import * as moment from 'moment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DataService } from './data.service';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CourseComponent } from './course/course.component';
 import { MainComponent } from './main/main.component';
-
-import { DataService } from './data.service';
 import { TopicListComponent } from './course/topic-list/topic-list.component';
+import { TopicFormComponent } from './course/topic-form/topic-form.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
     LoginComponent,
     CourseComponent,
     MainComponent,
-    TopicListComponent
+    TopicListComponent,
+    TopicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,11 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
     MatChipsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatInputModule
+    MatInputModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    TopicFormComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
