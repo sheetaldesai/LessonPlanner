@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../course';
+import { Topic } from '../topic';
 import * as moment from 'moment';
 import { DataService } from '../data.service';
+import { TopicFormComponent } from './topic-form/topic-form.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 @Component({
   selector: 'app-course',
@@ -9,17 +12,19 @@ import { DataService } from '../data.service';
   styleUrls: ['./course.component.css']
 })
 export class CourseComponent implements OnInit {
-  course;
+  course: Course;
   selectedDate: moment.Moment;
   currentWeek: moment.Moment[] = [];
+  undatedTopics: Topic[] = [];
 
   constructor(private _dataService: DataService) { }
 
   ngOnInit() {
     this.course = this._dataService.course;
     this.createWeek(this.course.startDate);
-    console.log(this.course.topics.length);
-    console.log("Course comp: ", this.selectedDate);
+    this._dataService.undatedTopics.subscribe(
+      topics => this.undatedTopics = topics
+    );
   }
 
   createWeek(selectedDay) {
@@ -38,6 +43,38 @@ export class CourseComponent implements OnInit {
     } else {
       this.selectedDate = moment(day);
     }
+    this._dataService.getTopics(this.course._id, this.selectedDate);
   }
+
+  remove(topic: Topic) {
+    const day = moment(topic.lessonDate);
+    topic.lessonDate = undefined;
+    this._dataService.getUndatedTopics(this.course._id);
+    this._dataService.getTopics(this.course._id, day);
+  }
+
+  topicsOnDay(day: moment.Moment): Topic[] {
+      return this.course.topics.filter(topic => moment(topic.lessonDate).isSame(day));
+  }
+
+  courseDayPickerFilter = (d: Date): boolean => {
+    const day = d.getDay();
+    // Prevent Saturday and Sunday from being selected.
+    return this.course.meetingDays.includes(day);
+  }
+
+  submitDate(event) {
+    console.log(event);
+  }
+
+  addTopicToDay(day: moment.Moment, topic: Topic) {
+    let idx = this.undatedTopics.indexOf(topic);
+    this.undatedTopics.splice(idx, 1);
+    topic.lessonDate = day.toDate();
+    this._dataService.getTopics(this.course._id, day);
+    this._dataService.getUndatedTopics(this.course._id);
+  }
+
+
 
 }

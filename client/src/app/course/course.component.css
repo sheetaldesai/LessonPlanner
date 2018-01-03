@@ -1,11 +1,28 @@
 .picked {
     border: 1px solid #FFAB00;
 }
-.calendar-nav {
-    text-align: right;
-}
 .fill-remaining-space {
     /* This fills the remaining space, by using flexbox.  */
     /* Every toolbar row uses a flexbox row layout. */
     flex: 1 1 auto;
+}
+.small-font {
+    font-size: 14px;
+}
+
+.calendar-day {
+    height: 80%;
+    width: 100%;
+}
+
+.no-lesson {
+    background-color: lightgray;
+}
+
+.topics {
+    margin-top: 10px;
+}
+
+.title {
+    margin-left: 20px;
 }

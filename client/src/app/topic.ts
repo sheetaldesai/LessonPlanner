@@ -8,7 +8,7 @@ export class Topic {
         public lessonDate: Date,
         public category: String,
         public duration: Number, // in minutes
-        public subTopics : String[],
+        public subTopics: String[],
         public resources: String[],
         public _course: String,
     ) {}

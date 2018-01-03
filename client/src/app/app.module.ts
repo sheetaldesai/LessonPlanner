@@ -11,21 +11,26 @@ import {
   MatFormFieldModule,
   MatCardModule,
   MatListModule,
-  MatButtonModule } from '@angular/material'; // add more stuff as needed, this was just random for now
-
+  MatButtonModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatInputModule,
+  MatDialogModule } from '@angular/material'; // add more stuff as needed, this was just random for now
 
 import * as moment from 'moment';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DataService } from './data.service';
+
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { CourseComponent } from './course/course.component';
 import { MainComponent } from './main/main.component';
-
-import { DataService } from './data.service';
 import { TopicListComponent } from './course/topic-list/topic-list.component';
 import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-dialog.component'; 
+import { TopicFormComponent } from './course/topic-form/topic-form.component';
 
 
 @NgModule({
@@ -34,8 +39,9 @@ import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-
     LoginComponent,
     CourseComponent,
     MainComponent,
-    EditTopicDialogComponent
-    
+    EditTopicDialogComponent,
+    TopicListComponent,
+    TopicFormComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +56,15 @@ import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-
     MatButtonModule,
     MatFormFieldModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    TopicFormComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

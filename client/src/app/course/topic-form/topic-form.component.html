@@ -1,0 +1,12 @@
+<h1 mat-dialog-title *ngIf="data.topic.title">Edit {{data.topic.title}}</h1>
+<h1 mat-dialog-title *ngIf="!data.topic.title">New Topic</h1>
+<div mat-dialog-content>
+  <p>Topic Title</p>
+  <mat-form-field>
+    <input matInput tabindex="1" [(ngModel)]="data.topic.title">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data.topic" cdkFocusInitial>Ok</button>
+</div>
