@@ -26,3 +26,9 @@
 .title {
     margin-left: 20px;
 }
+
+.topic_chip.mat-chip, .topic_chip.mat-chip+.mat-chip {
+    margin: 0;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}

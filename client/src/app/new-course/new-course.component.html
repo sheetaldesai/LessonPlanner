@@ -1,0 +1,55 @@
+<h1 class="title">Add New Course</h1>
+<form class="formwidth" (ngSubmit)="onSubmit()" #form="ngForm">
+
+  <mat-form-field class="fullwidth">
+    <input matInput placeholder="Course Name" id="coursename" [(ngModel)]="course.title" name="title" required  minlength="3">
+  </mat-form-field>
+
+  <mat-form-field class="fullwidth">
+    <textarea matInput placeholder="Description" [(ngModel)]="course.description" name="description"></textarea>
+  </mat-form-field>
+     
+  <table class="fullwidth" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field >
+          <input matInput [matDatepicker]="startdate" placeholder="Course start date" [(ngModel)] = "course.startDate" name="startDate" required>
+          <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+          <mat-datepicker #startdate></mat-datepicker>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field >
+          <input matInput [matDatepicker]="enddate" placeholder="Course end date" [(ngModel)] = "course.endDate" name="endDate" required>
+          <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+          <mat-datepicker #enddate></mat-datepicker>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+  <mat-form-field>
+      <mat-select [(ngModel)]="course.lessonDuration" placeholder="Lesson Duration (min)" name="lessonDuration">
+        <mat-option>None</mat-option>
+        <mat-option value="30">30</mat-option>
+        <mat-option value="45">45</mat-option>
+        <mat-option value="60">60</mat-option>
+        <mat-option value="60">75</mat-option>
+        <mat-option value="60">90</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <p> Meeting Days *: </p>
+  <table id="days">
+    <tr>
+      <td *ngFor="let day of days" class="days">
+        <mat-checkbox name="days" 
+          [(ngModel)]="day.checked" 
+          value="{{day.value}}">
+          {{day.name}}
+      </mat-checkbox>
+      </td>
+    </tr>
+  </table>
+  <p class="submit">
+    <button mat-raised-button type="submit" [disabled] = !form.form.valid>Submit</button>
+  </p>
+</form>

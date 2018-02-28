@@ -3,16 +3,11 @@
     flex: 1 1 auto;
   }
 
-  .card {
-      width: 600px;
-      height: 450px;
-      display: inline-block;
-      /* background-color: aquamarine;
-      color: lightslategray; */
-      padding: 0;
-      margin: 20px;
-      vertical-align: top;
+  mat-card {
+    height: 100%;
+    width: 100%;
   }
+  
 
   .card h1, .card h2, .card h3 {
       padding: 5px 5px 5px 24px;
@@ -26,6 +21,14 @@
       background-color: #673AB7;
       padding: 24px;
       color: whitesmoke;
+  }
+
+  .cardSubtitle {
+    height: 40px;
+  }
+
+  .cardSubtitle mat-icon {
+      color: #FFAB00;
   }
 
   .cardActions {

@@ -1,0 +1,31 @@
+
+.title {
+    margin-left: 20px;
+    
+}
+
+.formwidth {
+    margin-left: 20px;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+#days {
+   border-collapse: separate;
+   border-spacing: 15px 0px;
+}
+
+.submit {
+    margin-top: 20px;
+   
+}
+
+.submit button {
+    background-color: #FED64F
+}
+

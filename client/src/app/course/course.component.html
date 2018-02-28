@@ -37,7 +37,7 @@
       </mat-menu>
       <div class="topics">
         <mat-chip-list>
-          <mat-chip *ngFor="let topic of topicsOnDay(day)" [selectable]="selectable"
+          <mat-chip class="topic_chip"  *ngFor="let topic of topicsOnDay(day)" [selectable]="selectable"
                     removable="true" (remove)="remove(topic)">
             {{topic.title}}
             <mat-icon matChipRemove>cancel</mat-icon>

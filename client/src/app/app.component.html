@@ -3,16 +3,18 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <a mat-menu-item routerLink="/main">
+    <button mat-menu-item [routerLink]="['/main']">
       <mat-icon>dashboard</mat-icon>
       <span>My Courses</span>
-    </a>
-    <button mat-menu-item>
+    </button>
+    <button mat-menu-item [routerLink]="['/new']">
       <mat-icon>add</mat-icon>
       <span>Add a new Course</span>
     </button>
   </mat-menu>
   <span>Lesson Planner</span>
+  <span class="fill-remaining-space"></span>
+  <span>Welcome Sara!</span>
 </mat-toolbar>
 
 <router-outlet></router-outlet>

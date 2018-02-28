@@ -16,7 +16,12 @@ import {
   MatDatepickerModule,
   MatNativeDateModule,
   MatInputModule,
-  MatDialogModule } from '@angular/material'; // add more stuff as needed, this was just random for now
+  MatDialogModule,
+  MatTableModule,
+  MatCheckboxModule, 
+  MatSelectModule,
+  
+  } from '@angular/material'; // add more stuff as needed, this was just random for now
 
 import * as moment from 'moment';
 
@@ -31,6 +36,9 @@ import { MainComponent } from './main/main.component';
 import { TopicListComponent } from './course/topic-list/topic-list.component';
 import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-dialog.component'; 
 import { TopicFormComponent } from './course/topic-form/topic-form.component';
+import { AddSubtopicComponent } from './course/topic-list/add-subtopic/add-subtopic.component';
+import { NewCourseComponent } from './new-course/new-course.component';
+
 
 
 @NgModule({
@@ -41,7 +49,10 @@ import { TopicFormComponent } from './course/topic-form/topic-form.component';
     MainComponent,
     EditTopicDialogComponent,
     TopicListComponent,
-    TopicFormComponent
+    TopicFormComponent,
+    AddSubtopicComponent,
+    NewCourseComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -61,10 +72,15 @@ import { TopicFormComponent } from './course/topic-form/topic-form.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatSelectModule,
+
   ],
   entryComponents: [
-    TopicFormComponent
+    TopicFormComponent,
+    AddSubtopicComponent
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

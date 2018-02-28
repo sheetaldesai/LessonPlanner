@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Course } from './course';
 import { Topic } from './topic';
+import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'Rxjs';
 
@@ -19,8 +20,9 @@ export class DataService {
   );
   currentTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
   undatedTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  coursesObservable: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>([]);
 
-  constructor() {
+  constructor(private _http : HttpClient) {
     this.addTopics();
     this.getUndatedTopics(this.course._id);
    }
@@ -134,4 +136,30 @@ export class DataService {
     this.undatedTopics.next(this.course.topics.filter(topic => !topic.lessonDate));
   }
 
+  getAllCourses() {
+    this._http.get('/courses').subscribe(
+      (courses: any[])=>{
+        console.log("Got courses from server: ",courses);
+        this.coursesObservable.next(courses)
+      }),
+      error => console.log(error);
+  }
+
+  create(course: Course) {
+
+    console.log("Service creating new course: ",course);
+    this._http.post('/course', course).subscribe(
+      response => this.getAllCourses(),
+      errorResponse => console.log(errorResponse)
+    );
+  }
+
+  // delete(appt){
+  //   console.log("Service deleting appointment ", appt);
+  //   this._http.delete('/appts/'+appt._id).subscribe(response => {
+  //     console.log(response);
+  //     this.getAllAppointments();
+  //   });
+  // }
 }
+
