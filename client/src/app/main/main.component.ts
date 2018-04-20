@@ -4,6 +4,7 @@ import {Course} from '../course';
 import {DataSource} from '@angular/cdk/collections';
 import { CourseComponent } from '../course/course.component';
 import { Observable } from 'rxjs/Observable';
+import {Route, ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-main',
@@ -13,10 +14,12 @@ import { Observable } from 'rxjs/Observable';
 export class MainComponent implements OnInit {
 
   courses : Course[];
-  displayedColumns = ['title', 'description', 'startDate', 'endDate'];
+  displayedColumns = ['title', 'description', 'startDate', 'endDate', "meetingDays", "actions"];
   dataSource: CourseDataSource | null;
-  constructor(private _dataService: DataService) { 
+  constructor(private _dataService: DataService,
+              private router: Router) { 
     console.log("main comp constructor");
+    console.log('configured routes: ', this.router.config);
   }
 
   ngOnInit() {
@@ -24,6 +27,15 @@ export class MainComponent implements OnInit {
     console.log("main comp ngOnInit");
     this._dataService.getAllCourses();
     this.dataSource = new CourseDataSource(this._dataService);
+  }
+
+  editCourse(course: Course) {
+    console.log("edit course: ", course);
+  }
+
+  deleteCourse(course: Course) {
+    console.log("delete course: ", course);
+    this._dataService.delete(course);
   }
 
 }

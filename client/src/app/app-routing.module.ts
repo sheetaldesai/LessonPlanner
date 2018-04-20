@@ -3,13 +3,21 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { CourseComponent } from './course/course.component';
-import { NewCourseComponent } from './new-course/new-course.component';
+import { NewCourseComponent } from './course/new-course/new-course.component';
+import { CourseResolverService } from './course-resolver.service';
+
 
 const routes: Routes = [
-  {path: 'courses/:id', component: CourseComponent, pathMatch: 'full'},
-  {path: 'main', component: MainComponent, pathMatch: 'full'},
-  {path: 'new', component: NewCourseComponent, pathMatch: 'full'},
-  {path: '', pathMatch: 'full', redirectTo: '/main'}
+  
+  { path: 'dashboard',  component: MainComponent, pathMatch: 'full'},
+  { path: 'courses', children: [
+    {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+    {path: 'new', component: NewCourseComponent, pathMatch: 'full'}, 
+    {path: ':id/edit', component: NewCourseComponent, pathMatch: 'full', resolve:{course:CourseResolverService}},
+    {path: ':id', component: CourseComponent, pathMatch: 'full'}
+  ]},
+  
+  {path: '', pathMatch: 'full', redirectTo: '/dashboard'}
 ];
 
 @NgModule({

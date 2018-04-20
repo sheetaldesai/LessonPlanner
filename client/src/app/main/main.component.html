@@ -1,33 +1,59 @@
-<h1>Your courses</h1>
+<mat-toolbar class="fullwidth">Your Courses
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button [routerLink]="['/courses', 'new']">
+      <mat-icon aria-label="plus button">add</mat-icon>
+    </button>
+</mat-toolbar>
 <div class="example-container">
     <mat-table #table [dataSource]="dataSource">
   
       <!--- Note that these columns can be defined in any order.
             The actual rendered columns are set as a property on the row definition" -->
   
-      <!-- Position Column -->
+      <!-- Title Column -->
       <ng-container matColumnDef="title">
         <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
       </ng-container>
   
-      <!-- Name Column -->
+      <!-- Description Column -->
       <ng-container matColumnDef="description">
         <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
       </ng-container>
   
-      <!-- Weight Column -->
+      <!-- Start Date Column -->
       <ng-container matColumnDef="startDate">
         <mat-header-cell *matHeaderCellDef> Start Date </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.startDate | date:'fullDate'}} </mat-cell>
       </ng-container>
   
-      <!-- Symbol Column -->
+      <!-- End date Column -->
       <ng-container matColumnDef="endDate">
         <mat-header-cell *matHeaderCellDef> End Date </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element.endDate | date: 'fullDate'}} </mat-cell>
       </ng-container>
+
+      <ng-container matColumnDef="meetingDays">
+        <mat-header-cell *matHeaderCellDef> Meeting Days</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.meetingDays}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef> Actions</mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+              <button mat-icon-button [routerLink]="['/courses', element._id, 'edit']">
+                  <mat-icon aria-label="edit button">edit</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteCourse(element)">
+                  <mat-icon aria-label="delete button">delete</mat-icon>
+              </button>
+              <button mat-icon-button [routerLink]="['/courses', element._id]">
+                  <mat-icon aria-label="topic button">list</mat-icon>
+              </button>
+          </mat-cell>
+        </ng-container>
+     
   
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>

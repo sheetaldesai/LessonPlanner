@@ -37,7 +37,8 @@ import { TopicListComponent } from './course/topic-list/topic-list.component';
 import { EditTopicDialogComponent } from './course/edit-topic-dialog/edit-topic-dialog.component'; 
 import { TopicFormComponent } from './course/topic-form/topic-form.component';
 import { AddSubtopicComponent } from './course/topic-list/add-subtopic/add-subtopic.component';
-import { NewCourseComponent } from './new-course/new-course.component';
+import { NewCourseComponent } from './course/new-course/new-course.component';
+import { CourseResolverService } from './course-resolver.service';
 
 
 
@@ -82,7 +83,7 @@ import { NewCourseComponent } from './new-course/new-course.component';
     TopicFormComponent,
     AddSubtopicComponent
   ],
-  providers: [DataService],
+  providers: [DataService,CourseResolverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

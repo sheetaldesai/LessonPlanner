@@ -3,11 +3,11 @@
     <mat-icon>menu</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item [routerLink]="['/main']">
+    <button mat-menu-item [routerLink]="['dashboard']">
       <mat-icon>dashboard</mat-icon>
       <span>My Courses</span>
     </button>
-    <button mat-menu-item [routerLink]="['/new']">
+    <button mat-menu-item [routerLink]="['courses', 'new']">
       <mat-icon>add</mat-icon>
       <span>Add a new Course</span>
     </button>

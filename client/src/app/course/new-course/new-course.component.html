@@ -1,6 +1,12 @@
-<h1 class="title">Add New Course</h1>
+<mat-toolbar class="fullwidth">{{title}}
+  <span class="fill-remaining-space"></span>
+  <button mat-icon-button (click)="cancel()">
+    <mat-icon aria-label="cancel">cancel</mat-icon>
+  </button>
+</mat-toolbar>
 <form class="formwidth" (ngSubmit)="onSubmit()" #form="ngForm">
 
+  <div *ngIf="course">
   <mat-form-field class="fullwidth">
     <input matInput placeholder="Course Name" id="coursename" [(ngModel)]="course.title" name="title" required  minlength="3">
   </mat-form-field>
@@ -41,8 +47,10 @@
   <table id="days">
     <tr>
       <td *ngFor="let day of days" class="days">
+    
         <mat-checkbox name="days" 
-          [(ngModel)]="day.checked" 
+          [checked]="day.checked"
+          (change)="selectDays(course.meetingDays, day, $event)" 
           value="{{day.value}}">
           {{day.name}}
       </mat-checkbox>
@@ -52,4 +60,5 @@
   <p class="submit">
     <button mat-raised-button type="submit" [disabled] = !form.form.valid>Submit</button>
   </p>
+  </div>
 </form>

@@ -4,9 +4,13 @@ import { Topic } from './topic';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 import { BehaviorSubject } from 'Rxjs';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class DataService {
+
+  days = ["Sunday", "Monday", "Tuesday", "Wendesday", "Thursday", "Friday", "Saturday"];
+
   course = new Course(
     '2',
     'Sara',
@@ -21,6 +25,7 @@ export class DataService {
   currentTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
   undatedTopics: BehaviorSubject<any[]> = new BehaviorSubject([]);
   coursesObservable: BehaviorSubject<Course[]> = new BehaviorSubject<Course[]>([]);
+  courseObservable: BehaviorSubject<Course> = new BehaviorSubject(new Course());
 
   constructor(private _http : HttpClient) {
     this.addTopics();
@@ -137,12 +142,34 @@ export class DataService {
   }
 
   getAllCourses() {
-    this._http.get('/courses').subscribe(
-      (courses: any[])=>{
+    this._http.get('/courses')
+    // .map(course=>
+    //   {
+    //     course["meetingDays"].forEach(element => {
+    //     element = this.days[element];
+    //     console.log("meetingDays: ", element);
+    //   })
+    // })
+    .subscribe(
+      (courses : any[])=>{
         console.log("Got courses from server: ",courses);
         this.coursesObservable.next(courses)
       }),
       error => console.log(error);
+    
+  }
+
+  getCourse(id) {
+    // this._http.get('/courses/'+id).subscribe(
+    //   (course : Course)=>{
+    //     console.log("Got courses from server: ",course);
+    //     this.courseObservable.next(course);
+        
+    //   }),
+    //   error => console.log(error);
+    return this._http.get('/courses/'+id);
+
+
   }
 
   create(course: Course) {
@@ -154,12 +181,20 @@ export class DataService {
     );
   }
 
-  // delete(appt){
-  //   console.log("Service deleting appointment ", appt);
-  //   this._http.delete('/appts/'+appt._id).subscribe(response => {
-  //     console.log(response);
-  //     this.getAllAppointments();
-  //   });
-  // }
+  editCourse(c: Course) {
+    console.log("Dataservice editing course ", c);
+    this._http.put('courses/'+c._id, c).subscribe(
+      response => console.log(response)
+    );
+    
+  }
+
+  delete(course){
+    console.log("Service deleting course ", course);
+    this._http.delete('/courses/'+course._id).subscribe(response => {
+      console.log(response);
+      this.getAllCourses();
+    });
+  }
 }
 
