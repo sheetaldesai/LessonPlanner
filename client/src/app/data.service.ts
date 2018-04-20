@@ -3,7 +3,7 @@ import { Course } from './course';
 import { Topic } from './topic';
 import { HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
-import { BehaviorSubject } from 'Rxjs';
+import { BehaviorSubject } from 'rxjs';
 import 'rxjs/add/operator/map';
 
 @Injectable()
